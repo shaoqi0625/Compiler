@@ -33,7 +33,12 @@ lines   :   lines expr ';' {printf("%f\n", $2);}
 expr    :   expr add expr   {$$ = $1 + $3;} 
         |   expr sub expr   {$$ = $1 - $3;} 
         |   expr mul expr   {$$ = $1 * $3;} 
-        |   expr DIV expr   {$$ = $1 / $3;} 
+        |   expr DIV expr   {
+            if($3==0.0)
+                yyerror("Error! Divided by zero!");
+            else
+                $$ = $1 / $3;
+            } 
         |   left_parentheses expr right_parentheses {$$ = $2;}
         |   sub expr %prec UMINUS {$$ = -$2;}
         |   NUMBER          {$$ = $1;}

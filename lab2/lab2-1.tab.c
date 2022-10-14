@@ -555,8 +555,8 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    28,    28,    29,    30,    33,    34,    35,    36,    37,
-      38,    39
+       0,    28,    28,    29,    30,    33,    34,    35,    36,    42,
+      43,    44
 };
 #endif
 
@@ -1148,30 +1148,35 @@ yyreduce:
 
   case 8: /* expr: expr DIV expr  */
 #line 36 "lab2-1.y"
-                            {yyval = yyvsp[-2] / yyvsp[0];}
-#line 1153 "lab2-1.tab.c"
+                            {
+            if(yyvsp[0]==0.0)
+                yyerror("Error! Divided by zero!");
+            else
+                yyval = yyvsp[-2] / yyvsp[0];
+            }
+#line 1158 "lab2-1.tab.c"
     break;
 
   case 9: /* expr: left_parentheses expr right_parentheses  */
-#line 37 "lab2-1.y"
+#line 42 "lab2-1.y"
                                                     {yyval = yyvsp[-1];}
-#line 1159 "lab2-1.tab.c"
+#line 1164 "lab2-1.tab.c"
     break;
 
   case 10: /* expr: sub expr  */
-#line 38 "lab2-1.y"
+#line 43 "lab2-1.y"
                                   {yyval = -yyvsp[0];}
-#line 1165 "lab2-1.tab.c"
+#line 1170 "lab2-1.tab.c"
     break;
 
   case 11: /* expr: NUMBER  */
-#line 39 "lab2-1.y"
+#line 44 "lab2-1.y"
                             {yyval = yyvsp[0];}
-#line 1171 "lab2-1.tab.c"
+#line 1176 "lab2-1.tab.c"
     break;
 
 
-#line 1175 "lab2-1.tab.c"
+#line 1180 "lab2-1.tab.c"
 
       default: break;
     }
@@ -1364,7 +1369,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 42 "lab2-1.y"
+#line 47 "lab2-1.y"
 
 
 //programs section
